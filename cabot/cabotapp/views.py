@@ -152,10 +152,10 @@ class GraphiteStatusCheckForm(StatusCheckForm):
         model = GraphiteStatusCheck
         fields = (
             'name',
+            'frequency',
             'metric',
             'check_type',
             'value',
-            'frequency',
             'active',
             'importance',
             'expected_num_hosts',
@@ -423,7 +423,7 @@ class CheckCreateView(LoginRequiredMixin, CreateView):
             return reverse('service', kwargs={'pk': self.request.GET.get('service')})
         if self.request.GET.get('instance'):
             return reverse('instance', kwargs={'pk': self.request.GET.get('instance')})
-        return reverse('checks')  
+        return reverse('checks')
 
 
 class CheckUpdateView(LoginRequiredMixin, UpdateView):
@@ -758,10 +758,11 @@ def jsonify(d):
 @login_required
 def graphite_api_data(request):
     metric = request.GET.get('metric')
+    mins_to_check = request.GET.get('frequency')
     data = None
     matching_metrics = None
     try:
-        data = get_data(metric)
+        data = get_data(metric, mins_to_check)
     except requests.exceptions.RequestException, e:
         pass
     if not data:
