@@ -37,8 +37,8 @@ chmod -R 600 /home/ubuntu/.ssh
 chmod +x /home/ubuntu/.ssh
 
 # Disable root access
-passwd -l root
-echo 'SSH access for root disabled. You will need to connect as ubuntu.'
+# passwd -l root
+echo 'SSH access for root still enabled'
 
 packages=(
   'gcc'
@@ -62,8 +62,12 @@ packages=(
   'libldap2-dev'
 )
 
+echo 'apt installs'
+
 sudo apt-get update
 sudo apt-get install --quiet --assume-yes ${packages[*]}
+
+echo 'specific installs'
 
 # install ruby if it's not installed
 if ! which ruby; then
