@@ -341,7 +341,7 @@ class ServiceForm(forms.ModelForm):
         value = self.cleaned_data['hackpad_id']
         if not value:
             return ''
-        for pattern in settings.RECOVERY_SNIPPETS_WHITELIST:
+        for pattern in settings.RECOVERY_SNIPPETS_WHITELIST: # edited this so we can embed google-doc iframes
             if re.match(pattern, value):
                 return value
         raise ValidationError('Please specify a valid JS snippet link')
