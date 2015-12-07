@@ -155,6 +155,7 @@ RECOVERY_SNIPPETS_WHITELIST = (
     r'https?://[^.]+\.hackpad\.com/[^./]+\.js',
     r'https?://gist\.github\.com/[^.]+\.js',
     r'https?://www\.refheap\.com/[^.]+\.js',
+    r'https?://docs.google.com/[^.]'
 )
 
 # A sample logging configuration. The only tangible logging
